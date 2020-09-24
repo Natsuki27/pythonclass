@@ -7,7 +7,7 @@ def load():
     master_list = {}
     if os.path.exists('master_list.txt'):
         with open("master_list.txt", "rb") as input_ID:
-            pickle.load(input_ID)
+            master_list = pickle.load(input_ID)
     return master_list
 
 
@@ -42,7 +42,6 @@ while running:
 
                 else:
                     student_list[ID] = last_name + "," + first_name
-                    save()
                     print(last_name + " is added")
 
             else:
@@ -52,7 +51,6 @@ while running:
             answer = input("Enter the student's ID to remove>>>")
             if answer in student_list:
                 del [answer]
-                save()
                 print("Deleted")
 
             else:
@@ -78,6 +76,7 @@ while running:
                 print("Invalid option. Please try again.")
 
         elif option == "q":
+            save()
             running = False
 
     else:
