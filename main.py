@@ -1,7 +1,22 @@
+import os
 import pickle
-pickle.dump("Homework_2", "wb")
-f = open("Homework_2")
-student_list = {}
+import re
+
+
+def load():
+    master_list = {}
+    if os.path.exists('master_list.txt'):
+        with open("master_list.txt", "rb") as input_ID:
+            pickle.load(input_ID)
+    return master_list
+
+
+def save():
+    with open("master_list.txt", "wb") as output:
+        pickle.dump(student_list, output)
+
+
+student_list = load()
 running = True
 while running:
 
@@ -19,27 +34,25 @@ while running:
             ID = input("Enter the student ID#>>>")
 
             if ID.isnumeric():
-                if ID in f.student_list:
-                    val = f.student_list[ID]
+                if ID in student_list:
+                    val = [ID]
                     print(ID + " is used for")
                     print(val)
-                    print("Please select different ID. Try again.")
-                    f.close()
+                    print('Please select different ID. Try again.')
 
                 else:
-                    f.wight[ID] = last_name + "," + first_name
+                    student_list[ID] = last_name + "," + first_name
+                    save()
                     print(last_name + " is added")
-                    f.close()
 
             else:
                 print("Please use numbers for ID. Try again.")
 
         elif option == "d":
             answer = input("Enter the student's ID to remove>>>")
-            if answer in f:
+            if answer in student_list:
                 del [answer]
-                f.close()
-
+                save()
                 print("Deleted")
 
             else:
@@ -50,15 +63,13 @@ while running:
             print("select b to display individual student")
             option2 = input(">>>")
             if option2 == "a":
-                print(f.student_list)
-                f.close()
+                print(student_list)
 
             elif option2 == "b":
                 ID: str = input("Please input the student's ID>>>")
                 if ID.isnumeric():
-                    val = f.student_list[ID]
+                    val = student_list[ID]
                     print(val)
-                    f.close()
 
                 else:
                     print("Please input correct ID#. Try again.")
