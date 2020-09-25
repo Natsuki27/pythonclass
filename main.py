@@ -1,18 +1,17 @@
 import os
 import pickle
-import re
 
 
 def load():
     master_list = {}
-    if os.path.exists('master_list.txt'):
-        with open("master_list.txt", "rb") as input_ID:
+    if os.path.exists('master_list'):
+        with open("master_list", "rb") as input_ID:
             master_list = pickle.load(input_ID)
     return master_list
 
 
 def save():
-    with open("master_list.txt", "wb") as output:
+    with open("master_list", "wb") as output:
         pickle.dump(student_list, output)
 
 
@@ -50,7 +49,7 @@ while running:
         elif option == "d":
             answer = input("Enter the student's ID to remove>>>")
             if answer in student_list:
-                del [answer]
+                del student_list[answer]
                 print("Deleted")
 
             else:
