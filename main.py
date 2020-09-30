@@ -79,4 +79,4 @@ while running:
             running = False
 
     else:
-        print("Please select a,d,p or q")
+        print("Please select a, d, p or q")
